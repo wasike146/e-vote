@@ -1,0 +1,11 @@
+body {
+			margin: 0;
+
+		}
+.main {
+			width: 700px;
+			height: 100%;
+			background: #a1ffff;
+			margin-left: auto;
+			margin-right: auto;
+	}

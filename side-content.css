@@ -1,0 +1,211 @@
+/* 
+	CSS styles for main-content, include side bar and content.
+	Credit : Wildan S. Nahar (c) 2014 
+	Mail : wildansn@arc.itb.ac.id
+*/
+.main-content {
+		background: #a1ffff;
+		height: 86.5%;
+		width: 100%;
+		font-family: arial;
+		position: relative;
+	}
+/*  SIDEBAR properties
+stagnan, tidak perlu diganti 
+*/
+	.sidebar {
+		float: left;
+		background: #00a1d9;
+		height: 100%;
+		width: 27.5%;
+		font-family: arial;
+		}
+
+	.sidebar ul {
+				list-style: none;
+				margin-top: 10px;
+				font-size: 20px;
+				padding-left: 35px;
+
+			}
+			 a {
+				text-decoration: none;
+				color: blue;
+			}
+			 p {
+				padding-left: 14px;
+				font-family: sans-serif;
+				font-size: 13px;
+				text-align: left;
+				margin: 10px 0;
+			}
+			div1 {
+				padding-left: 50px;
+			}
+			a:hover {
+				color: black;
+			}
+
+			li {
+				margin: 10px 0;
+			}
+h1 {
+		font-size: 20px;
+		text-align: center;
+	}
+	ol {
+		font-size: 20px;
+	}
+/* CONTENT Properties
+dinamis, perlu perubahan sesuai halaman yang dituju
+*/
+			.content {
+		float:left;
+		background:#a1ffff;
+		height: 100%;
+		width: 72.5%;
+		font-family: arial;
+	}
+/* Home */
+	.home {
+		text-align: center;
+		font-size: 30px;
+		font-family: sans-serif;
+		padding-top: 40px;
+	}
+	.home img {
+		width: 175px;
+		height: 175	px;
+	}
+	.home blockquote {
+		font-size: 20px;
+		font-family: museo;
+	}
+/* History */
+.history img {
+	width: 102px;
+	height: 102px;
+}
+ .history ol {
+ 	font-size: 13px;
+ 	padding-left: 65px;
+ 	margin-bottom: -15px;
+ 	list-style: decimal;	
+ }
+ .rules ol {
+	font-size: 15px;fo
+	padding-right: 4px;	
+}
+.rules a {
+	text-decoration: none;
+}
+.kiri {
+	float: left;
+}
+.kanan {
+	float: left;
+	margin-left: 60px;
+}
+
+/* Candidates */
+.candidates a {
+	font-size: 13px;
+	color: black;
+}
+
+
+/* Rules */
+
+/* About */
+.about img {
+	width: 200px;
+	height: 200px;
+}
+.disclaimer h2 {
+	font-size: 20px;
+}
+
+.disclaimer {
+	text-align: center;
+	font-family: ubuntu;
+}
+/* Sign Up */
+.akun-aktif {
+	font-size: 12px;
+}
+
+.signup h1,h2 {
+	line-height: 60%;
+}
+
+.signup p {
+	text-align: center;
+	font-size: 20px;
+}
+
+.register-form {
+	padding-left: 10px;
+
+}
+
+.register-form table {
+	font-family: arial;
+	font-size: 14px;
+	line-height: 190%;
+
+
+}
+
+/* Log In */
+.login ul {
+	list-style: none;
+}
+
+.login p {
+	text-align: center;
+}
+
+.login-form {
+	padding-left: 10px;
+}
+
+.login-form table {
+	font-family: arial;
+	font-size: 15px;
+	line-height: 190%;
+}
+
+.login a {
+	padding-left: 10px;
+}
+
+/* RESET PASS */
+.resetpass-form {
+	padding-left: 14px;
+}
+
+/* VOTE */
+.voting {
+	padding-left: 12px;
+	font-size: 15px;
+}
+
+.vote-form {
+	padding-left: 12px;
+
+}
+
+.vote-form img {
+	position: center;
+}
+
+/* CONTACT */
+.contact {
+	padding-top: 60px;
+}
+
+/* CONFIRMATION PAGE */
+
+.confirmation {
+	padding-left: 12px;
+}
