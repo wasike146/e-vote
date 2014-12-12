@@ -1,4 +1,4 @@
-e-vote | o-vote based on web
+e-vote | electronic vote based on web
 ======
 Simple online voting which coded with HTML, CSS, PHP, and JavaScript.
 
