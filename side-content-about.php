@@ -1,3 +1,7 @@
+<?php
+ 		session_start();
+ 		?>
+
 <body>
 
 <link rel="stylesheet" type="text/css" href="side-content.css">
@@ -13,7 +17,14 @@
 				<li> <a href="/log-in.php" title="Get in here"> <img src="img/log-in.svg">	</a>	</li> 
 				<li> <a href="/vote.php" title="Vote! here"> <img src="img/vote.svg">	</a>	</li>
 				<li> <a href="/about.php" title="About this web"> <img src="img/about.svg"> 		</a>	</li> 
-				
+						<?php
+ 		
+ 		
+ 		if(isset($_SESSION["id"])) {
+
+				echo "<li> <a href='/logout.php' title='Log out'> <img src='img/logout.svg'> 		</a>	</li>";
+				}	
+				?> 
 			</ul> 
 			<br><br>
 			<!-- CONTACT PERSON -->
