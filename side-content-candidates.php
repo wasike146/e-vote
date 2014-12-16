@@ -51,6 +51,19 @@
  			</a>
  			</figure>
  			</center>
+ 			<div class="visi">
+ 			<p>
+ 				VISI - MISI
+ 				<ul>
+ 					<li>
+ 						Presentasi Visi-Misi WAHYU Muqsita <a href="docs/wahyu.pptx"> klik disini </a>
+ 					</li>
+ 					<li>
+ 						Presentasi Visi-Misi SYAIFUL Andy <a href="docs/syaiful.pptx"> klik disini </a>
+ 					</li>
+ 				</ul>
+ 			</p>
+ 			</div>
  		</div>
 	</div>
 
