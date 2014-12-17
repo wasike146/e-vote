@@ -95,7 +95,7 @@ if(!isset($_SESSION["id"])) {
 			if (mysqli_connect_errno()){
 			  echo "Failed to connect to MySQL: " . mysqli_connect_error();
 			  }
-  
+  // code for prevent SQL Injection is here...
 			//echo $password;
 			$result = mysqli_query($con,"SELECT * FROM user WHERE username = '$username' and password = '$password'");
 			//$row  = mysql_fetch_array($result);
