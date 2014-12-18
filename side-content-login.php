@@ -52,7 +52,7 @@ function reload() {
 </head>
 <body>
 <?php
-session_start();
+
 ?>
 <?php
 if(file_exists("sql.php")){
@@ -90,12 +90,14 @@ if(!isset($_SESSION["id"])) {
 			 $password = md5($password);
 		   }
 		
-			$con = mysqli_connect("$host","$user","$passdb","$db");
+			/*$con = mysqli_connect("$host","$user","$passdb","$db");
 			
 			if (mysqli_connect_errno()){
 			  echo "Failed to connect to MySQL: " . mysqli_connect_error();
 			  }
-  // code for prevent SQL Injection is here...
+
+			// code for prevent SQL Injection is here...
+			$username = mysqli_real_escape_string($con, $_POST['username']);
 			//echo $password;
 			$result = mysqli_query($con,"SELECT * FROM user WHERE username = '$username' and password = '$password'");
 			//$row  = mysql_fetch_array($result);
@@ -107,13 +109,43 @@ if(!isset($_SESSION["id"])) {
 				$_SESSION["hasVoted"] = $row["hasVoted"];
 				$_SESSION["active"] = $row["active"];
 			} else {
-				$message = "Invalid Username or Password!";
+				
 			}
 			if(isset($_SESSION["id"])) {
 				
 				header("Location:vote.php");
 				
 			}
+			*/
+
+			$conn = new mysqli($host, $user, $passdb, $db);
+
+			if ($conn->connect_error) {
+			    die("Connection failed: " . $conn->connect_error);
+			}
+
+			$stmt = $conn->prepare("SELECT id, hasVoted, active FROM user WHERE username=? AND password=?");
+			$stmt->bind_param('ss', $username, $password);
+
+			$stmt->execute();
+			//$result = $stmt->get_result();
+		    $stmt->bind_result($id_, $hasVoted_, $active_);
+
+			/* fetch values */
+			if ($stmt->fetch())
+			{
+				echo("Login success");
+				$_SESSION["id"] = $id_;
+				$_SESSION["username"] = $username;
+				$_SESSION["hasVoted"] = $hasVoted_;
+				$_SESSION["active"] = $active_;
+				header("Location:vote.php");
+			}
+			else
+			{
+				$message = "Invalid Username or Password!";
+			}
+			$stmt->close();
 			
 			
 		}
