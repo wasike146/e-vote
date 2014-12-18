@@ -52,7 +52,7 @@ if(file_exists("sql.php")){
 } else {
 	die("Error");
 }
-session_start();
+
 if(isset($_SESSION["id"])){
 	
 	include('akun-sudah-aktif.php');
@@ -145,19 +145,37 @@ if(isset($_SESSION["id"])){
 				$cpassOK = true;
 			 }
 			   
+			var_dump($_POST);
+			var_dump($emailOK);
+			var_dump($passOK);
+			var_dump($cpassOK);
+			var_dump($nameOK);
+			var_dump($angkatanOK);
+
+
 			  if($emailOK && $passOK && $cpassOK && $nameOK && $angkatanOK){
+
+
+			  		echo("okokokokokoko");
+
 					//echo 'zzzzzzzzzzzzz';
-					$con = mysqli_connect("$host","$user","$passdb","$db");
+					/*$con = mysqli_connect("$host","$user","$passdb","$db");
 
 					if (mysqli_connect_errno()){
 					  echo "Failed to connect to MySQL: " . mysqli_connect_error();
 					}
 
+					$email = mysqli_real_escape_string($con, $_POST['email']);
+					$name = mysqli_real_escape_string($con, $_POST['name']);
+					$angkatan = mysqli_real_escape_string($con, $_POST['angkatan']);
 					// echo($host.' '.$user.' '.$passdb.' '.$db);
 		
 					$result = mysqli_query($con,"SELECT * FROM user WHERE username = '$email'");
 					$row = mysqli_fetch_array($result,MYSQLI_ASSOC);
 					// var_dump($row);
+
+					echo("okokokokokoko");
+
 					if(!(is_array($row))) {
 						$token = generateRandomString();
 						$sql="INSERT INTO user (username,fullname,angkatan,password,hasVoted,active,regtime,expire,token)
@@ -183,7 +201,54 @@ if(isset($_SESSION["id"])){
 						echo("$emailErr");
 					}
 					
-					mysqli_close($con);
+					mysqli_close($con);*/
+					
+
+					$conn = new mysqli($host, $user, $passdb, $db);
+
+					if ($conn->connect_error) {
+					    die("Connection failed: " . $conn->connect_error);
+					}
+
+					$stmt = $conn->prepare("SELECT COUNT(*) FROM user WHERE username=?");
+					$stmt->bind_param('s', $username);
+
+					$stmt->execute();
+					//$result = $stmt->get_result();
+				    $stmt->bind_result($count_);
+
+					if ($stmt->fetch() && $count_>0)
+					{
+						$emailErr = "email sudah terdaftar";
+						echo("$emailErr");
+
+						$stmt->close();
+					}
+					else
+					{
+						$stmt->close();
+
+						$token = generateRandomString();
+						$stmt_insert = $conn->prepare("INSERT INTO user (username,fullname,angkatan,password,hasVoted,active,regtime,expire,token) VALUES (?, ?, ?, ?, false, false, NOW(), ADDDATE(NOW(), INTERVAL 1 DAY), ?)");
+						$stmt_insert->bind_param('ssiss',$email, $name, $angkatan, $pass, $token);
+
+						if (!$stmt_insert->execute()) {
+						  die('Error: ' . $stmt_insert->error);
+						} else {
+							$to = "$email";
+							$subject = "Confirm registration";
+							$link = "http://pemilu.arc.itb.ac.id/confirmation.php?name=".$email."&code=".$token;
+							$txt = "Untuk melakukan registrasi. Klik $link";
+							$headers = "From: pemilu@arc.itb.ac.id" . "\r\n" .
+							"CC: somebodyelse@example.com";
+
+							mail($to,$subject,$txt,$headers);
+							header("Location:register-success.php");
+						}
+
+						$stmt_insert->close();
+					}
+
 			}
 		}	
 	?>
@@ -328,7 +393,7 @@ if(isset($_SESSION["id"])){
 		<form name="form-reg" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" onsubmit="return chkValidity()">
 			<table>
 			<tr><td width="80">Nama</td><td><input width="250" type="text" required placeholder="Nama lengkap" name="name" id="name" value=""></td></tr>
-			</td><td><span class="error"><?php echo $emailErr;?></td></span></tr>
+			</td><td><span class="error"></td></span></tr>
 			<tr><td>Angkatan</td><td><select name="angkatan" required>
 		   <option value="">Pilih salah satu</option>
 		   <option value="2011">2011</option>
@@ -338,9 +403,9 @@ if(isset($_SESSION["id"])){
 		   </select></td></tr>
 		   <tr><td width="100">Email</td><td><input width="250" type="text" required placeholder="Gunakan email @arc.itb.ac.id" name="email" value=""></td></tr>
 			<tr><td>Password</td><td><input id="pass1" type="password" required placeholder="Password" name="password" value="" onkeyup="chkPasswordStrength(this.value)">
-			</td><td><span class="error"><?php echo $passErr;?></td><td id="strendth" class="strength5">Password Strength</td><td id="error"></td></span></tr>
+			</td><td><span class="error"></td><td id="strendth" class="strength5">Password Strength</td><td id="error"></td></span></tr>
 			<tr><td>Konfirmasi</td><td><input id="pass2" type="password" required placeholder="Confirm password" name="cpassword" value="" onkeyup="checkPass()">
-			</td><td><span class="error"><?php echo $cpassErr;?></td><td id="confirmMessage"><td></span></tr>
+			</td><td><span class="error"></td><td id="confirmMessage"><td></span></tr>
 			</table>
 			<input type="submit" name="submit" value="Submit"><input type="reset" value="Reset!">
 		</form>
