@@ -8,5 +8,5 @@ To use, just register with e-mail @arc.itb.ac.id, then log in to vote.
 Made with pride,
 
 
-by : Wildan & Ivan.
+by : Wildan ,Ivan and Wasike.
 [Kru ARC ITB 2014]
